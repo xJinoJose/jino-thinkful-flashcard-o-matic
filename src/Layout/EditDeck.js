@@ -5,7 +5,7 @@ import { readDeck, updateDeck } from '../utils/api';
 function EditDeck() {
   const mountedRef = useRef(false);
   const initialState = { name: '', description: '' };
-  const [editDeckFormData, setEditDeckFormData] = useState(initialState);
+  const [deckData, setDeckData] = useState(initialState);
 
   const { deckId } = useParams();
   const history = useHistory();
@@ -23,7 +23,7 @@ function EditDeck() {
       try {
         const loadedDeck = await readDeck(deckId, abortController.signal);
         if (mountedRef.current) {
-          setEditDeckFormData(() => loadedDeck);
+          setDeckData(() => loadedDeck);
         }
       } catch (error) {
         if (error.name !== 'AbortError') {
@@ -39,7 +39,7 @@ function EditDeck() {
   }, [deckId]);
 
   const changeHandler = ({ target }) => {
-    setEditDeckFormData((currentState) => ({
+    setDeckData((currentState) => ({
       ...currentState,
       [target.name]: target.value,
     }));
@@ -47,8 +47,10 @@ function EditDeck() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const response = await updateDeck(editDeckFormData);
-    history.push(`/decks/${response.id}`);
+    const abortController = new AbortController();
+    const response = await updateDeck({ ...deckData }, abortController.signal);
+    history.push(`/decks/${deckId}`);
+    return response;
   };
 
   return (
@@ -57,12 +59,12 @@ function EditDeck() {
         <ol className='breadcrumb'>
           <li className='breadcrumb-item'>
             <Link to='/'>
-              <i className='fas fa-home'></i> Home
+            <i class="bi bi-house"></i> Home
             </Link>
           </li>
           <li className='breadcrumb-item'>
             <Link to={`/decks/${deckId}`}>
-              {editDeckFormData.name ? editDeckFormData.name : 'Loading...'}
+              {deckData.name ? deckData.name : 'Loading...'}
             </Link>
           </li>
           <li className='breadcrumb-item active' aria-current='page'>
@@ -70,7 +72,7 @@ function EditDeck() {
           </li>
         </ol>
       </nav>
-      <form>
+      <form onSubmit={submitHandler}>
         <h1 className='my-4 text-center'>Edit Deck</h1>
         <div className='form-group'>
           <label htmlFor='name'>Name</label>
@@ -81,7 +83,7 @@ function EditDeck() {
             type='text'
             placeholder='Deck Name'
             onChange={changeHandler}
-            value={editDeckFormData.name}
+            value={deckData.name}
             required
           ></input>
         </div>
@@ -94,7 +96,7 @@ function EditDeck() {
             rows='5'
             placeholder='Brief description of the deck'
             onChange={changeHandler}
-            value={editDeckFormData.description}
+            value={deckData.description}
             required
           ></textarea>
         </div>

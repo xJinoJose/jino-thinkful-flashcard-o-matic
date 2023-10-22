@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { readDeck } from '../utils/api';
 
 function StudyDeck() {
@@ -14,6 +14,8 @@ function StudyDeck() {
   const { deck, isCardFlipped, currentIndex } = studyDeckState;
 
   const { deckId } = useParams();
+
+  const history = useHistory();
 
   useEffect(() => {
     mountedRef.current = true;
@@ -54,6 +56,27 @@ function StudyDeck() {
 
   function getNextCardHandler() {
     const { cards } = deck;
+    if (currentIndex < cards.length - 1) {
+      setStudyDeckState((currentState) => ({
+        ...currentState,
+        currentIndex: currentState.currentIndex++,
+        isCardFlipped: !currentState.isCardFlipped,
+      }));
+    } else {
+      if (
+        window.confirm('Do you want to restart the deck and study again?')
+        ) {
+          setStudyDeckState((currentState) => ({
+            ...currentState,
+            currentIndex: 0,
+          }));
+        } else {
+          history.push("/");
+        }
+
+    }
+
+    /*
     if (currentIndex === cards.length - 1) {
       const response = window.confirm(
         'Do you want to restart the deck and study again?'
@@ -69,8 +92,9 @@ function StudyDeck() {
         ...currentState,
         currentIndex: currentState.currentIndex++,
         isCardFlipped: !currentState.isCardFlipped,
-      }));
+      }));      
     }
+    */
   }
 
   const breadcrumb = (
