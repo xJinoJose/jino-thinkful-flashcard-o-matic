@@ -83,7 +83,7 @@ function EditCard() {
         <ol className='breadcrumb'>
           <li className='breadcrumb-item'>
             <Link to='/'>
-            <i class="bi bi-house"></i> Home
+            <i className="bi bi-house"></i> Home
             </Link>
           </li>
           <li className='breadcrumb-item'>

@@ -73,7 +73,7 @@ function ViewDeck() {
                   className='btn btn-light'
                   onClick={() => history.push(`/decks/${deck.id}/edit`)}
                 >
-                  <i class="bi bi-pencil-square"></i> Edit
+                  <i className="bi bi-pencil-square"></i> Edit
                 </button>
               </Link>            
               <Link to={`/decks/${deck.id}/study`} className='card-link'>
@@ -82,7 +82,7 @@ function ViewDeck() {
                   className='btn btn-primary'
                   onClick={() => history.push(`/decks/${deck.id}/study`)}
                 >
-                  <i class="bi bi-journals"></i> Study
+                  <i className="bi bi-journals"></i> Study
                 </button>
               </Link>
               <Link to={`/decks/${deck.id}/cards/new`} className='card-link'>
@@ -91,7 +91,7 @@ function ViewDeck() {
                   className='btn btn-primary'
                   onClick={() => history.push(`/decks/${deck.id}/cards/new`)}
                 >
-                  <i class="bi bi-plus-circle"></i> Add Cards
+                  <i className="bi bi-plus-circle"></i> Add Cards
                 </button>
               </Link>
             </div>
@@ -100,7 +100,7 @@ function ViewDeck() {
               className='btn btn-danger'
               onClick={() => deleteHandler(deckId)}
             >
-              <i class="bi bi-trash"></i> Delete Deck
+              <i className="bi bi-trash"></i> Delete Deck
             </button>       
           </div>
         </div>

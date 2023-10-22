@@ -24,7 +24,7 @@ function ViewCards({ cards = [] }) {
           <div className='col-6'>
             <div className='card'>
               <div className='card-header p-3 mb-2 bg-secondary text-white'>
-                <h5 class="card-title">Front</h5>
+                <h5 className="card-title">Front</h5>
               </div>
               <div className='card-body'>              
                 {card.front}
@@ -34,7 +34,7 @@ function ViewCards({ cards = [] }) {
           <div className='col-6'>
             <div className='card'>
               <div className='card-header p-3 mb-2 bg-secondary text-white'>
-                <h5 class="card-title">Back</h5>
+                <h5 className="card-title">Back</h5>
               </div>
               <div className='card-body'>              
                 {card.back}
@@ -46,7 +46,7 @@ function ViewCards({ cards = [] }) {
           <div>
             <Link to={`${url}/cards/${card.id}/edit`}>
               <button className='btn btn-secondary m-3'>
-              <i class="bi bi-pencil-square"></i> Edit
+              <i className="bi bi-pencil-square"></i> Edit
               </button>
             </Link>
           </div>
@@ -55,7 +55,7 @@ function ViewCards({ cards = [] }) {
               className='btn btn-danger m-3'
               onClick={() => deleteCardHandler(card.id)}
             >
-              <i class="bi bi-trash"></i> Delete Card
+              <i className="bi bi-trash"></i> Delete Card
             </button>        
           </div>
         </div>

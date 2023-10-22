@@ -75,7 +75,6 @@ function StudyDeck() {
         }
 
     }
-
     /*
     if (currentIndex === cards.length - 1) {
       const response = window.confirm(
@@ -102,7 +101,7 @@ function StudyDeck() {
       <ol className='breadcrumb'>
         <li className='breadcrumb-item'>
           <Link to='/'>
-          <i class="bi bi-house"></i> Home
+          <i className="bi bi-house"></i> Home
           </Link>
         </li>
         <li className='breadcrumb-item'>
@@ -152,23 +151,23 @@ function StudyDeck() {
                 : `Answer: ${deck.cards[currentIndex].back}`}
             </h5>
           </div>
-          <div class="d-flex flex-row justify-content-between">
-            <div class="w-25 p-2">
+          <div className="d-flex flex-row justify-content-between">
+            <div className="w-25 p-2">
                 <button
                   type='button'
                   className='w-100 btn btn-secondary py-3'
                   onClick={() => flipCardHandler()}
                 >
-                <i class="bi bi-arrow-repeat"></i> Flip
+                <i className="bi bi-arrow-repeat"></i> Flip
               </button>
             </div>
           {isCardFlipped && (
-            <div class="w-25 p-2">
+            <div className="w-25 p-2">
               <button
                 className='w-100 btn btn-primary py-3'
                 onClick={getNextCardHandler}
               >
-                Next <i class="bi bi-caret-right"></i>
+                Next <i className="bi bi-caret-right"></i>
               </button>
             </div>
           )}
